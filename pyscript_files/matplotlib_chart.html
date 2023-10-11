@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Sample Chart</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+    <py-config>
+        packages = ["matplotlib", "numpy"]
+    </py-config>
+<h3>Random number plot</h3>
+<div id="plot"></div>
+<py-script outuput="plot">
+    import matplotlib.pyplot as plt
+    import numpy as np
+    x = np.random.randn(1000)
+    y = np.random.randn(1000)
+    fig, ax = plt.subplots()
+    ax.scatter(x, y)
+    display(fig)
+</py-script>
+</body>
+</html>
