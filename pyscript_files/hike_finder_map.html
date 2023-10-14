@@ -21,6 +21,8 @@
 
   url = "https://raw.githubusercontent.com/christyheaton/Data_Umbrella_Geospatial_Data/master/Data/2021-04-25_wta_hike_data.csv"
   hike_data = pd.read_csv(open_url(url))
+  
+  hike_data = hike_data.dropna(subset=['LATITUDE', 'LONGITUDE', 'DISTANCE'])
 
   hike_data = hike_data[(hike_data["DISTANCE"] >= 8) & (hike_data["DISTANCE"] <= 20) & (hike_data["DIST_TYPE"] == "roundtrip")].reset_index(drop=True)
   hike_data = hike_data[hike_data["RATING"] >= 4].reset_index(drop=True)
@@ -28,10 +30,10 @@
   hikes_gdf = gpd.GeoDataFrame(hike_data, geometry=gpd.points_from_xy(hike_data.LONGITUDE, hike_data.LATITUDE))
   hikes_gdf = hikes_gdf.set_crs("epsg:4326")
 
-  hikes_gdf = hikes_gdf.sample(n=5)
+  sample_hikes = hikes_gdf.sample(n=5)
 
   m = folium.Map(location=[47.6, -122.3], zoom_start=7)
-  for index, row in hikes_gdf.iterrows():
+  for index, row in sample_hikes.iterrows():
     popup_text = "Name: {}<br> Distance: {}"
     popup_text = popup_text.format(row["TITLE"], row["DISTANCE"])
     folium.CircleMarker(location= (row["geometry"].y, row["geometry"].x), color="orange", radius=10, popup=popup_text, fill=True).add_to(m)
