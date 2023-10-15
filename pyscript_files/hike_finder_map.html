@@ -10,7 +10,7 @@
 <body>
   <div id="folium"></div>
   <py-config>
-    packages = ["folium", "pandas", "geopandas"]
+    packages = ["folium", "pandas", "geopandas", "matplotlib", "mapclassify"]
   </py-config>
 <py-script output="map">
   import folium
@@ -18,26 +18,31 @@
   import geopandas as gpd
   from pyodide.http import open_url
 
+  # load and read data
   url = "https://raw.githubusercontent.com/christyheaton/webmapping_with_pyscript/main/Data/2021-04-25_wta_hike_data.csv"
   hike_data = pd.read_csv(open_url(url))
-  
-  hike_data = hike_data.dropna(subset=['LATITUDE', 'LONGITUDE', 'DISTANCE'])
 
+  # clean data
+  hike_data = hike_data.dropna(subset=['LATITUDE', 'LONGITUDE', 'DISTANCE'])
+  hike_data.at[937,'LATITUDE'] = 48.3093
+  hike_data.at[937,'LONGITUDE'] = -120.6565
+  hike_data.at[2412,'LONGITUDE'] = -120.4
+
+  # filter data
   hike_data = hike_data[(hike_data["DISTANCE"] >= 8) & (hike_data["DISTANCE"] <= 20) & (hike_data["DIST_TYPE"] == "roundtrip")].reset_index(drop=True)
   hike_data = hike_data[hike_data["RATING"] >= 4].reset_index(drop=True)
 
+  # add geometry
   hikes_gdf = gpd.GeoDataFrame(hike_data, geometry=gpd.points_from_xy(hike_data.LONGITUDE, hike_data.LATITUDE))
   hikes_gdf = hikes_gdf.set_crs("epsg:4326")
 
+  # create sample
   sample_hikes = hikes_gdf.sample(n=5)
 
-  m = folium.Map(location=[47.6, -122.3], zoom_start=7)
-  for index, row in sample_hikes.iterrows():
-    popup_text = "Name: {}<br> Distance: {}"
-    popup_text = popup_text.format(row["TITLE"], row["DISTANCE"])
-    folium.CircleMarker(location= (row["geometry"].y, row["geometry"].x), color="orange", radius=10, popup=popup_text, fill=True).add_to(m)
+  # create interactive map
+  m = sample_hikes.explore(marker_kwds=dict(radius=6))
 
-  display(m, target="folium")
+  display(m)
 </py-script>
 </body>
 </html>

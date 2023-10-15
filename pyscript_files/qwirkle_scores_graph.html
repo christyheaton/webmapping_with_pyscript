@@ -24,14 +24,21 @@
     scores = scores.set_index("turn")
     sorted_cumsum = scores.sort_index().cumsum()
 
+    # create and configure plot
     fig, ax = plt.subplots()
     plt.xticks(np.arange(20))
     ax.set_xlabel("Turn")
     ax.set_ylabel("Score")
+
+    # add lines
     ax.plot(sorted_cumsum["b"], label = "b")
     ax.plot(sorted_cumsum["c"], label = "c")
     ax.plot(sorted_cumsum["t"], label = "t")
+
+    # add legend
     ax.legend()
+
+    # display
     display(fig)
 </py-script>
 </body>
