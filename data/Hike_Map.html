@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7a89246ed64119ce20fab2e4335a3e71 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    
+                    <style>
+                        .foliumtooltip {
+                            
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_7a89246ed64119ce20fab2e4335a3e71" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7a89246ed64119ce20fab2e4335a3e71 = L.map(
+                "map_7a89246ed64119ce20fab2e4335a3e71",
+                {
+                    center: [47.75695000065, -121.136887553],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_7a89246ed64119ce20fab2e4335a3e71);
+
+            
+
+        
+    
+            var tile_layer_fc06ed210b763fa5b6ce1463ac0f98e6 = L.tileLayer(
+                "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 20, "maxZoom": 20, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_7a89246ed64119ce20fab2e4335a3e71);
+        
+    
+            map_7a89246ed64119ce20fab2e4335a3e71.fitBounds(
+                [[47.3725515, -123.190475106], [48.1413485013, -119.0833]],
+                {}
+            );
+        
+    
+        function geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillOpacity": 0.5, "weight": 2};
+            }
+        }
+        function geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillOpacity": 0.75};
+            }
+        }
+        function geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_pointToLayer(feature, latlng) {
+            var opts = {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3};
+            
+            let style = geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84 = L.geoJson(null, {
+                onEachFeature: geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_onEachFeature,
+            
+                style: geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_styler,
+                pointToLayer: geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_pointToLayer
+        });
+
+        function geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_add (data) {
+            geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84
+                .addData(data)
+                .addTo(map_7a89246ed64119ce20fab2e4335a3e71);
+        }
+            geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84_add({"bbox": [-123.190475106, 47.3725515, -119.0833, 48.1413485013], "features": [{"bbox": [-122.1755585, 48.0001929, -122.1755585, 48.0001929], "geometry": {"coordinates": [-122.1755585, 48.0001929], "type": "Point"}, "id": "2846", "properties": {"DISTANCE": 3.0, "DIST_TYPE": "roundtrip", "GAIN": null, "HIGHEST": null, "LATITUDE": 48.0001929, "LONGITUDE": -122.1755585, "RATING": 2.33, "RATING_COUNT": 3, "REGION": "Puget Sound and Islands", "REPORT_COUNT": 28, "REPORT_DATE": "2021-04-11", "TITLE": "Langus Riverfront Park", "URL": "https://www.wta.org/go-hiking/hikes/langus-riverfront-park"}, "type": "Feature"}, {"bbox": [-123.190475106, 48.1413485013, -123.190475106, 48.1413485013], "geometry": {"coordinates": [-123.190475106, 48.1413485013], "type": "Point"}, "id": "1203", "properties": {"DISTANCE": 3.0, "DIST_TYPE": "trails", "GAIN": null, "HIGHEST": null, "LATITUDE": 48.1413485013, "LONGITUDE": -123.190475106, "RATING": 3.5, "RATING_COUNT": 2, "REGION": "Olympic Peninsula", "REPORT_COUNT": 9, "REPORT_DATE": "2021-03-15", "TITLE": "Dungeness Recreation Area", "URL": "https://www.wta.org/go-hiking/hikes/dungeness-recreation-area"}, "type": "Feature"}, {"bbox": [-121.1597297, 47.3725515, -121.1597297, 47.3725515], "geometry": {"coordinates": [-121.1597297, 47.3725515], "type": "Point"}, "id": "1830", "properties": {"DISTANCE": 15.0, "DIST_TYPE": "roundtrip", "GAIN": 2800.0, "HIGHEST": 5100.0, "LATITUDE": 47.3725515, "LONGITUDE": -121.1597297, "RATING": 2.0, "RATING_COUNT": 2, "REGION": "Snoqualmie Region", "REPORT_COUNT": 2, "REPORT_DATE": "2020-04-09", "TITLE": "Thorp Mountain - Winter", "URL": "https://www.wta.org/go-hiking/hikes/thorp-mountain-snowshoe"}, "type": "Feature"}, {"bbox": [-121.287839413, 48.0584094456, -121.287839413, 48.0584094456], "geometry": {"coordinates": [-121.287839413, 48.0584094456], "type": "Point"}, "id": "2679", "properties": {"DISTANCE": 2.0, "DIST_TYPE": "roundtrip", "GAIN": 700.0, "HIGHEST": 2800.0, "LATITUDE": 48.0584094456, "LONGITUDE": -121.287839413, "RATING": 3.5, "RATING_COUNT": 2, "REGION": "North Cascades", "REPORT_COUNT": 9, "REPORT_DATE": "2020-09-05", "TITLE": "Red Mountain Lookout", "URL": "https://www.wta.org/go-hiking/hikes/red-mountain-lookout-1"}, "type": "Feature"}, {"bbox": [-119.0833, 47.8657, -119.0833, 47.8657], "geometry": {"coordinates": [-119.0833, 47.8657], "type": "Point"}, "id": "1301", "properties": {"DISTANCE": 1.8, "DIST_TYPE": "roundtrip", "GAIN": 550.0, "HIGHEST": 2300.0, "LATITUDE": 47.8657, "LONGITUDE": -119.0833, "RATING": 2.75, "RATING_COUNT": 4, "REGION": "Central Washington", "REPORT_COUNT": 8, "REPORT_DATE": "2020-03-20", "TITLE": "Old Wagon Road Trail", "URL": "https://www.wta.org/go-hiking/hikes/old-wagon-road-trail"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+    geo_json_4c3f3eb95d00cfb7f0aabbc41b45ff84.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature=>typeof(feature)=='object' ? JSON.stringify(feature) : feature;
+    let fields = ["TITLE", "REGION", "DISTANCE", "DIST_TYPE", "GAIN", "HIGHEST", "RATING", "RATING_COUNT", "LATITUDE", "LONGITUDE", "REPORT_DATE", "REPORT_COUNT", "URL"];
+    let aliases = ["TITLE", "REGION", "DISTANCE", "DIST_TYPE", "GAIN", "HIGHEST", "RATING", "RATING_COUNT", "LATITUDE", "LONGITUDE", "REPORT_DATE", "REPORT_COUNT", "URL"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i]}</th>
+            
+            <td>${handleObject(layer.feature.properties[v])}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{"className": "foliumtooltip", "sticky": true});
+                     
+</script>
+</html>

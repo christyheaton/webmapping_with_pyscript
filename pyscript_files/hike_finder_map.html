@@ -40,7 +40,7 @@
   sample_hikes = hikes_gdf.sample(n=5)
 
   # create interactive map
-  m = sample_hikes.explore(marker_kwds=dict(radius=6))
+  m = sample_hikes.explore(tiles='CartoDB positron', marker_kwds=dict(radius=12))
 
   display(m)
 </py-script>
