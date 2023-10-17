@@ -1,5 +1,7 @@
 # Web Mapping with PyScript - October 18, 2023
 
+[Presentation Slides](https://docs.google.com/presentation/d/121dD56Mb2qiANhA5GlP6MNLDFcrxLXxVDoXXnBh51nE/edit?usp=sharing)
+
 ### Data Sources
 
 * [Washington State Hikes](https://github.com/yoshiohasegawa/wta-scraper)
