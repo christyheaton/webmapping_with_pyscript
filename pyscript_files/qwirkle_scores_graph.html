@@ -18,7 +18,7 @@
     import pandas as pd
     from pyodide.http import open_url
 
-    url = "https://raw.githubusercontent.com/christyheaton/webmapping_with_pyscript/main/Data/2021-09_qwirkle_scores.csv"
+    url = "https://raw.githubusercontent.com/christyheaton/webmapping_with_pyscript/main/data/2021-09_qwirkle_scores.csv"
     scores = pd.read_csv(open_url(url))
 
     scores = scores.set_index("turn")
