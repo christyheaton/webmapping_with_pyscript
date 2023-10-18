@@ -11,6 +11,11 @@
 
 * Simply open them in a modern browser with an internet connection.
 
+
+### Run code from pyscript.com
+
+* https://cheaton.pyscriptapps.com/5-random-hikes-in-washington-state/latest/
+
 ### To run the code in the Jupyter Notebooks
 
 * If you are familiar with [GitHub](http://www.github.com), fork (if you wish) and clone this repository. If not, download the repository and unzip to a working directory. Take note of where you put it!
